@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Hugo tranquilpeak theme</title>
+    <link>https://tokoroteen.github.io/posts/</link>
+    <description>Recent content in Posts on Hugo tranquilpeak theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Dec 2022 21:35:11 +0900</lastBuildDate><atom:link href="https://tokoroteen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First Post</title>
+      <link>https://tokoroteen.github.io/2022/12/first-post/</link>
+      <pubDate>Thu, 01 Dec 2022 21:35:11 +0900</pubDate>
+      
+      <guid>https://tokoroteen.github.io/2022/12/first-post/</guid>
+      <description>初投稿</description>
+    </item>
+    
+    <item>
+      <title>Elements showcase</title>
+      <link>https://tokoroteen.github.io/2015/05/elements-showcase/</link>
+      <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://tokoroteen.github.io/2015/05/elements-showcase/</guid>
+      <description>&lt;p&gt;Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&amp;rsquo;s simple and elegant.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

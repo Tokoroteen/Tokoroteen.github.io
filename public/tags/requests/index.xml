@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Requests on Tokoroteen</title>
-    <link>https://tokoroteen.github.io/tags/requests/</link>
+    <link>https://tokoroteen.com/tags/requests/</link>
     <description>Recent content in Requests on Tokoroteen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Dec 2022 18:10:10 +0900</lastBuildDate><atom:link href="https://tokoroteen.github.io/tags/requests/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 18:10:10 +0900</lastBuildDate><atom:link href="https://tokoroteen.com/tags/requests/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scraping Japanese activity search sites in search of undiscovered activities</title>
-      <link>https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</link>
+      <link>https://tokoroteen.com/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</link>
       <pubDate>Tue, 13 Dec 2022 18:10:10 +0900</pubDate>
       
-      <guid>https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</guid>
+      <guid>https://tokoroteen.com/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</guid>
       <description>1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!</description>
     </item>
     

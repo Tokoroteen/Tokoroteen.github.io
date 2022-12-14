@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Tokoroteen</title>
-    <link>https://tokoroteen.github.io/posts/</link>
-    <description>Recent content in Posts on Tokoroteen</description>
+    <title>Requests on Tokoroteen</title>
+    <link>https://tokoroteen.github.io/tags/requests/</link>
+    <description>Recent content in Requests on Tokoroteen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Dec 2022 18:10:10 +0900</lastBuildDate><atom:link href="https://tokoroteen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2022 18:10:10 +0900</lastBuildDate><atom:link href="https://tokoroteen.github.io/tags/requests/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scraping Japanese activity search sites in search of undiscovered activities</title>
       <link>https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</link>
@@ -14,24 +14,6 @@
       
       <guid>https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/</guid>
       <description>1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!</description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>https://tokoroteen.github.io/2022/12/first-post/</link>
-      <pubDate>Thu, 01 Dec 2022 21:35:11 +0900</pubDate>
-      
-      <guid>https://tokoroteen.github.io/2022/12/first-post/</guid>
-      <description>初投稿</description>
-    </item>
-    
-    <item>
-      <title>Elements showcase</title>
-      <link>https://tokoroteen.github.io/2015/05/elements-showcase/</link>
-      <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://tokoroteen.github.io/2015/05/elements-showcase/</guid>
-      <description>&lt;p&gt;Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&amp;rsquo;s simple and elegant.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Scraping Japanese activity search sites in search of undiscovered activities",
+  
+  "image": "https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/9b146bef-8190-1813-93c9-ab67e5ad1086.png",
+  
+  "datePublished": "2022-12-13T18:10:10+09:00",
+  "dateModified": "2022-12-13T18:10:10+09:00",
+  "author": {
+    "@type": "Person",
+    "name": "Tokoroteen",
+    
+    "image": "https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c"
+    
+  },
+  "mainEntityOfPage": { 
+    "@type": "WebPage",
+    "@id": "https:\/\/tokoroteen.github.io\/2022\/12\/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities\/" 
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tokoroteen",
+    
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c"
+    }
+    
+  },
+  "description": "1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!",
+  "keywords": []
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Tokoroteen">
+<meta name="keywords" content="">
+<meta name="description" content="1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!">
+
+
+<meta property="og:description" content="1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scraping Japanese activity search sites in search of undiscovered activities">
+<meta name="twitter:title" content="Scraping Japanese activity search sites in search of undiscovered activities">
+<meta property="og:url" content="https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/">
+<meta property="twitter:url" content="https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/">
+<meta property="og:site_name" content="Tokoroteen">
+<meta property="og:description" content="1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!">
+<meta name="twitter:description" content="1. Outline I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on. I saw an article, machine learning from the information in the food log, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2022-12-13T18:10:10">
+  
+  
+    <meta property="article:modified_time" content="2022-12-13T18:10:10">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Python">
+    
+      <meta property="article:tag" content="scraping">
+    
+      <meta property="article:tag" content="BeautifulSoup">
+    
+      <meta property="article:tag" content="Requests">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@tokoroteen__">
+
+
+  <meta name="twitter:creator" content="@tokoroteen__">
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/9b146bef-8190-1813-93c9-ab67e5ad1086.png">
+  <meta property="twitter:image" content="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/9b146bef-8190-1813-93c9-ab67e5ad1086.png">
+
+
+    <title>Scraping Japanese activity search sites in search of undiscovered activities</title>
+
+    <link rel="icon" href="https://tokoroteen.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://tokoroteen.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://tokoroteen.github.io/" aria-label="Go to homepage">Tokoroteen</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://tokoroteen.github.io/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://tokoroteen.github.io/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Tokoroteen</h4>
+        
+          <h5 class="sidebar-profile-bio">Something interesting that moves your heart</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/products" title="Products">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Products</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/archives" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/tokoroteen" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/Tokoroteen__" target="_blank" rel="noopener" title="Twitter">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-twitter" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://tokoroteen.github.io/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Scraping Japanese activity search sites in search of undiscovered activities
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2022-12-13T18:10:10&#43;09:00">
+        
+  December 13, 2022
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://tokoroteen.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h1 id="1-outline">1. Outline</h1>
+<p>I love hands-on activities. I love surfing, going to see Yakusugi cedar trees, making snow globes, preparing perfumes, and so on.
+I saw an article, <a href="https://qiita.com/toshiyuki_tsutsui/items/f143946944a428ed105b">machine learning from the information in the food log</a>, that uses machine learning to make ramen recommendations based on information from the food log, and I thought it would be fun to do an activity version of this! I thought it would be fun to do an activity version of this!</p>
+<p>When you are looking for activities, I think you follow a three-step below.</p>
+<ol>
+<li>think about your thoughts about the holiday, such as &ldquo;I&rsquo;m stressed out and I want to feel refreshed&rdquo;.</li>
+<li>think about how you want to spend your holiday, e.g. &ldquo;I want to go bungee jumping to feel refreshed&rdquo; etc.</li>
+<li>find an activity and book it</li>
+</ol>
+<p>In this thought flow, I feel that each person&rsquo;s creativity(?) is required to move from 1 to 2. I feel that the transition from 1 to 2 requires creativity from each person. Of course, it&rsquo;s not uncommon for people to make plans based on what they want to do, such as &ldquo;I want to go bungee jumping,&rdquo; but I think it takes a lot of imagination and creativity to go from a desire for a holiday, such as <strong>&ldquo;I want to feel refreshed,&rdquo;</strong> to coming up with a way to spend time, such as <strong>&ldquo;I think this activity is good for that. I think it is a work that requires imagination and creativity.&rdquo;</strong>
+In fact, when I tell my friends about these experiences I&rsquo;ve had, it&rsquo;s not uncommon for them to say, &ldquo;How did you find that?&rdquo;</p>
+<p>So, I&rsquo;d like to use machine learning to <strong>shape your thoughts on holidays into activities</strong>!
+I want to build a model that learns from word-of-mouth information, and when you enter the thought &ldquo;I want to feel refreshed&rdquo;, it will tell you &ldquo;I recommend XXX activity for that&rdquo;!</p>
+<p>This time, I&rsquo;m collecting study data for this purpose.
+As a site for researching and booking hands-on activities, <a href="https://www.asoview.com/">Asoview!</a> is probably the most famous in Japan. As far as I can tell, AssoView! I couldn&rsquo;t find any articles about scraping with it, so I&rsquo;m going to give it a try!</p>
+<p>The finished app is here. (Only Japanese search is available.)</p>
+<p><a href="https://lifac.herokuapp.com/">https://lifac.herokuapp.com/</a></p>
+<p>For example, when you want to &ldquo;fly in the sky&rdquo; (you can add the sea element after the search and subtract the mountain element!)</p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/9b146bef-8190-1813-93c9-ab67e5ad1086.png" alt="screenshot 2022-11-03 13.50.37.png"></p>
+<p>For example, when you want to be &ldquo;healed by animals&rdquo;.</p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/4ce7ede4-a952-443b-59ba-807ceec0f2f2.png" alt="Screenshot 2022-11-03 13.50.48.png"></p>
+<h1 id="2-take-a-walk-on-the-homepage-of-asoview">2. Take a walk on the homepage of Asoview!</h1>
+<p>First, I needed to see how the activity information is listed in Asoview! to see how the activity information is listed.
+For example, if you&rsquo;re looking at <a href="https://www.asoview.com/base/156897/">Moomin Valley Park</a>, which is one of the most famous theme park in Saitama prefecture, you&rsquo;ll see  something like this.
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/32389a9d-6ba9-767c-de7e-81f36daa2078.jpeg" alt="Moomin.jpg"></p>
+<p>You can see that the yellow circled area contains the name of the facility, a review, the location of the facility, and the genre (in this case, amusement park/theme park). The genres include paragliding, athletics, incense making, and so on. We will attempt to scrape these information later.</p>
+<p>The URL for this page is</p>
+<p><strong><a href="https://www.asoview.com/base/156897/">https://www.asoview.com/base/156897/</a></strong></p>
+<p>and
+For the other URL is</p>
+<ul>
+<li>tea ceremony class <a href="https://www.asoview.com/base/155331/">https://www.asoview.com/base/155331/</a></li>
+<li>Paragliding <a href="https://www.asoview.com/base/960/">https://www.asoview.com/base/960/</a></li>
+</ul>
+<p>For each facility
+<code>https://www.asoview.com/base/&lt;&lt;facility unique number&gt;&gt;/</code>
+so I&rsquo;d like to scrape it as I change the <code>&lt;&lt;facility unique number&gt;&gt;</code>.</p>
+<p>I&rsquo;m struggling to figure out what rules are used for the <code>&lt;&lt;facility unique number&gt;&gt;</code> here 😅.
+Some numbers are 6, some are 155331, and there is a wide range from 1 to 6 digits. I wandered around the homepage to see if the numbers were assigned based on some rules, but I couldn&rsquo;t find any rules after all&hellip;</p>
+<p>But if I accessed the site while changing the numbers from 1 to 99999999, it would be in trouble.
+Then, I found it! <a href="https://www.asoview.com/base/">Here</a> is the list of facilities!
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/585daaee-85e9-8481-7f66-0af7a04dd686.jpeg" alt="List of Locations.jpg">
+I&rsquo;m going to extract each facility&rsquo;s unique number from this page!</p>
+<h1 id="3-extract-the-list-of-facilities">3. Extract the list of facilities</h1>
+<p>First, let&rsquo;s try to get the <code>&lt;&lt;facility unique number&gt;&gt;</code> (henceforth referred to as the activity number) from the previous site.
+If you right click on the site &gt; Verify, you will see
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/891ed2af-5fa5-8e67-41b1-947bb207158e.jpeg" alt="kenshou.jpeg"></p>
+<p>You can see how the site is written in HTML. You can also check the structure of the site element by element here.
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/34ede00e-c592-dd51-f559-77bffb1b240e.jpeg" alt="kenshou2.jpeg"></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/22729b4a-2d1d-81f0-5b1c-877aa91a9938.jpeg" alt="base_links.jpg"></p>
+<p>First of all, get all activitiy No. from this a tab.
+Import what you need</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span></code></pre></div><p>By using Requests, you can get HTML, which is then parsed by BeautifulSoup.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span>url<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.asoview.com/base/&#34;</span>
+</span></span><span style="display:flex;"><span>n_list <span style="color:#f92672">=</span> [] <span style="color:#75715e">#Put the activity no. in this list</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url) <span style="color:#75715e">#Get the HTML</span>
+</span></span><span style="display:flex;"><span>soup <span style="color:#f92672">=</span> BeautifulSoup(res<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#34;html.parser&#34;</span>) <span style="color:#75715e">#pass to BeautifulSoup</span>
+</span></span><span style="display:flex;"><span>links <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;a&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page-base__base-link&#34;</span>) <span style="color:#75715e">#All a tabs whose class is &#34;page-base__base-link&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n_list <span style="color:#f92672">=</span> [int(re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;\D*&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, link<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;href&#39;</span>))) <span style="color:#66d9ef">for</span> link <span style="color:#f92672">in</span> links]
+</span></span></code></pre></div><p>Get the href in the a tab with <code>link.get('href')</code> and extract only the numbers with <a href="https://qiita.com/luohao0404/items/7135b2b96f9b0b196bf3">regular expression</a>.
+If you check the contents with <code>print(n_list)</code>, you will see that</p>
+<pre tabindex="0"><code>[163, 178, 191, 232, 260, 261, 263, 264, 281, 314, .....]
+</code></pre><p>and I could get the activity No. well. From <code>len(n_list)</code>, you can see that the number of activity listings is 8786. We will use this <code>n_list</code> to get the basic information of each activity.</p>
+<h1 id="4-basic-information-about-each-activity">4. Basic information about each activity</h1>
+<p>If you look at the page of <a href="https://www.asoview.com/base/155331/">Tea ceremony class</a> in the activity No.155331, you will see that&hellip;
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/5f6bdee8-e297-8a0a-5235-e77d0e99c221.jpeg" alt="sadou.jpg">
+The name of the facility, number of ratings/evaluations, location &gt; detailed location, genre of the activity, and a description of the facility are listed, so we will retrieve this information for each activity and compile it into one file.</p>
+<p>Import the missing stuff, and then run</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span></code></pre></div><p>Create a DataFrame from which to add the retrieved information.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span><span style="color:#75715e">#Create a DataFrame.</span>
+</span></span><span style="display:flex;"><span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;area&#34;</span>, <span style="color:#e6db74">&#34;small_area&#34;</span>, <span style="color:#e6db74">&#34;genre_type&#34;</span>, <span style="color:#e6db74">&#34;rating_star&#34;</span>, <span style="color:#e6db74">&#34;rating_asorepo&#34;</span>, <span style="color:#e6db74">&#34;introduction_title&#34;</span>, <span style="color:#e6db74">&#34;introduction_text&#34;</span>, <span style="color:#e6db74">&#34;No.&#34;</span> <span style="color:#e6db74">&#34;url&#34;</span>, <span style="color:#e6db74">&#34;review_link&#34;</span>]
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(index<span style="color:#f92672">=</span>[], columns<span style="color:#f92672">=</span>columns)
+</span></span></code></pre></div><p>I got the ``<a href="https://www.asoview.com/base/">https://www.asoview.com/base/</a><!-- raw HTML omitted -->/` link and the link to the review page together.</p>
+<p>Just like when I got the activity No., for example, if it is the name of the facility, we can see that the class of the h1 tag is &ldquo;base-name&rdquo;.
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2704675/aa0b65f0-be38-7f08-b6d2-c9915de1650a.jpeg" alt="base_name.jpg"></p>
+<p>Thus, you can get the facility name by <code>soup.find(&quot;h1&quot;, class_=&quot;base-name&quot;).text</code>.
+In this way, you will get other values as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> n_list: <span style="color:#75715e">#each activity No.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;https://www.asoview.com/base/</span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">/&#34;</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+</span></span><span style="display:flex;"><span>    soup <span style="color:#f92672">=</span> BeautifulSoup(res<span style="color:#f92672">.</span>content, <span style="color:#e6db74">&#34;html.parser&#34;</span>)
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    res<span style="color:#f92672">.</span>raise_for_status()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;There is a URL in No.</span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    base_name <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;h1&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-name&#34;</span>)<span style="color:#f92672">.</span>text <span style="color:#75715e">#name of facility</span>
+</span></span><span style="display:flex;"><span>    base_data <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;div&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-summary-contents&#34;</span>)
+</span></span><span style="display:flex;"><span>    base_data_area <span style="color:#f92672">=</span> base_data<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;span&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-data__area&#34;</span>)<span style="color:#f92672">.</span>text <span style="color:#75715e">#location</span>
+</span></span><span style="display:flex;"><span>    base_data_small_area <span style="color:#f92672">=</span> base_data<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;span&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-data__small-area&#34;</span>)<span style="color:#f92672">.</span>text <span style="color:#75715e">#detail location</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#There can be more than one genre.</span>
+</span></span><span style="display:flex;"><span>    base_data_genre_type <span style="color:#f92672">=</span> base_data<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#34;li&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-data__genre-type&#34;</span>) <span style="color:#75715e">#genre</span>
+</span></span><span style="display:flex;"><span>    base_data_genre_type_list <span style="color:#f92672">=</span> list(i<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> base_data_genre_type)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    review_link <span style="color:#f92672">=</span> base_data<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;a&#34;</span>)<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;href&#34;</span>) <span style="color:#75715e">#link to review</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#rating</span>
+</span></span><span style="display:flex;"><span>    base_data_rating <span style="color:#f92672">=</span> base_data<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;i&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;base-data__rating&#34;</span>)
+</span></span><span style="display:flex;"><span>    base_data_rating_star <span style="color:#f92672">=</span> float(base_data_rating<span style="color:#f92672">.</span>contents[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>text) <span style="color:#75715e">#num of star</span>
+</span></span><span style="display:flex;"><span>    base_data_rating_asorepo <span style="color:#f92672">=</span> int(int(base_data_rating<span style="color:#f92672">.</span>contents[<span style="color:#ae81ff">5</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;,&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>))) <span style="color:#75715e">#num of review</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    introduction_text_title <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;b&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;introduction__text-title&#34;</span>)<span style="color:#f92672">.</span>text <span style="color:#75715e">#introduction title</span>
+</span></span><span style="display:flex;"><span>    introduction_text <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;p&#34;</span>, class_<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;introduction__text&#34;</span>)<span style="color:#f92672">.</span>text <span style="color:#75715e">#introduction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#df to add on</span>
+</span></span><span style="display:flex;"><span>    df_new <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame([[base_name, base_data_area, base_data_small_area, base_data_genre_type_list, base_data_rating_star, base_data_rating_asorepo, introduction_text_title, introduction_text, n, url, review_link]],
+</span></span><span style="display:flex;"><span>                          columns<span style="color:#f92672">=</span>columns)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#add on</span>
+</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([df, df_new], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    count<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#save every 100 pieces</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> count<span style="color:#f92672">%</span><span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>      df<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;base_data_</span><span style="color:#e6db74">{</span>count<span style="color:#e6db74">}</span><span style="color:#e6db74">.csv&#39;</span>)
+</span></span><span style="display:flex;"><span>      print(<span style="color:#e6db74">&#34;Running time：&#34;</span>, time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> start)
+</span></span><span style="display:flex;"><span>      print(<span style="color:#e6db74">&#34;Rate of progress：&#34;</span>, str((count<span style="color:#f92672">/</span>len(n_list))<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>), <span style="color:#e6db74">&#34;%&#34;</span>)
+</span></span><span style="display:flex;"><span>      time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>HTTPError <span style="color:#66d9ef">as</span> e: <span style="color:#75715e">#exception handling</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;HTTPError:&#34;</span>, e)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>ConnectionError <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;ConnectionError:&#34;</span>, e)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Error&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span></code></pre></div><p>I checked the elements of the site and retrieved them one by one in the same way as when I retrieved the activity No.
+If you look at the df retrieved by <code>df.head()</code>, you will see that</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">area</th>
+<th style="text-align:left">small_area</th>
+<th style="text-align:left">genre_type</th>
+<th style="text-align:left">rating_star</th>
+<th style="text-align:left">rating_asorepo</th>
+<th style="text-align:left">introduction_title</th>
+<th style="text-align:left">introduction_text</th>
+<th style="text-align:left">No.</th>
+<th style="text-align:left">url</th>
+<th style="text-align:left">review_link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">ガイドラインアウトドアクラブ</td>
+<td style="text-align:left">北海道</td>
+<td style="text-align:left">富良野・美瑛・トマム</td>
+<td style="text-align:left">[&lsquo;ラフティング&rsquo;]</td>
+<td style="text-align:left">5.0</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left">3歳からOKのラフティング！川を全身で遊ぼう！自然を満喫しよう☆</td>
+<td style="text-align:left">南富良野にある水の綺麗な「シーソラプチ川」と「空知川源流部」にてラフティングを開催。全ツアー&hellip;</td>
+<td style="text-align:left">163</td>
+<td style="text-align:left">省略</td>
+<td style="text-align:left">/base/163/asorepo/list/</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">洞爺ガイドセンター</td>
+<td style="text-align:left">北海道</td>
+<td style="text-align:left">洞爺・登別・苫小牧</td>
+<td style="text-align:left">[&lsquo;レイクカヌー&rsquo;, &lsquo;エコツアー･自然体験&rsquo;, &lsquo;スノーシュー・スノートレッキング&rsquo;]</td>
+<td style="text-align:left">0.0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">美しい洞爺湖を満喫。「旬なプラン」をご提供します！</td>
+<td style="text-align:left">北海道・洞爺湖で、自然体験アクティビティを開催している洞爺ガイドセンター。美しい自然をご案内&hellip;</td>
+<td style="text-align:left">178</td>
+<td style="text-align:left">省略</td>
+<td style="text-align:left">/base/178/asorepo/list/</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">函館どさんこファーム</td>
+<td style="text-align:left">北海道</td>
+<td style="text-align:left">函館・大沼・松前</td>
+<td style="text-align:left">[&lsquo;乗馬 その他&rsquo;]</td>
+<td style="text-align:left">0.0</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">どさんこと触れあう函館の旅！函館空港・函館駅から車で20分！</td>
+<td style="text-align:left">函館どさんこファームは函館空港・函館駅から20分と、アクセス抜群・好立地の乗馬クラブです。...</td>
+<td style="text-align:left">191</td>
+<td style="text-align:left">省略</td>
+<td style="text-align:left">/base/191/asorepo/list/</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">リバートリップ北海道</td>
+<td style="text-align:left">北海道</td>
+<td style="text-align:left">洞爺・登別・苫小牧</td>
+<td style="text-align:left">[&lsquo;ラフティング&rsquo;]</td>
+<td style="text-align:left">0.0</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">女子会プランも大好評！北海道最高峰の激流・鵡川で本格ラフティング！</td>
+<td style="text-align:left">リバートリップは、北海道最高峰と言われている鵡川で、本格的な激流ラフティングをご提供していま&hellip;</td>
+<td style="text-align:left">232</td>
+<td style="text-align:left">省略</td>
+<td style="text-align:left">/base/232/asorepo/list/</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">知床サイクリングサポート</td>
+<td style="text-align:left">北海道</td>
+<td style="text-align:left">網走・北見・知床</td>
+<td style="text-align:left">[&lsquo;マウンテンバイク（MTB）・ダウンヒル&rsquo;]</td>
+<td style="text-align:left">0.0</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">ベテランガイドがご案内！知床を肌で感じるネイチャーサイクリングツアー！</td>
+<td style="text-align:left">知床サイクリングサポートは、世界自然遺産に選ばれた北海道・知床半島を中心に、マウンテンバイク&hellip;</td>
+<td style="text-align:left">260</td>
+<td style="text-align:left">省略</td>
+<td style="text-align:left">/base/260/asorepo/list/</td>
+</tr>
+</tbody>
+</table>
+<p>I&rsquo;ve got some nice data!
+Finally, save this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python:base_data_scraping.py" data-lang="python:base_data_scraping.py"><span style="display:flex;"><span>df<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;base_data.csv&#39;</span>)
+</span></span></code></pre></div><h1 id="5-summary">5. Summary</h1>
+<p>From an activity booking website, I was able to retrieve basic information about each activity.
+In the next article, I will use the information I obtained to find out what facilities are listed on Asoview!</p>
+
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://tokoroteen.github.io/tags/python/">Python</a>
+
+  <a class="tag tag--primary tag--small" href="https://tokoroteen.github.io/tags/scraping/">scraping</a>
+
+  <a class="tag tag--primary tag--small" href="https://tokoroteen.github.io/tags/beautifulsoup/">BeautifulSoup</a>
+
+  <a class="tag tag--primary tag--small" href="https://tokoroteen.github.io/tags/requests/">Requests</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://tokoroteen.github.io/2022/12/first-post/" data-tooltip="First Post" aria-label="PREVIOUS: First Post">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="Leave a comment">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'https:\/\/tokoroteen.github.io\/2022\/12\/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities\/';
+        
+          this.page.identifier = '\/2022\/12\/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities\/'
+        
+      };
+      (function() {
+        
+        
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+          return;
+        }
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        var disqus_shortname = 'hugo-tranquilpeak-theme';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2022 Tokoroteen. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://tokoroteen.github.io/2022/12/first-post/" data-tooltip="First Post" aria-label="PREVIOUS: First Post">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://tokoroteen.github.io/2022/12/scraping-japanese-activity-search-sites-in-search-of-undiscovered-activities/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="Leave a comment">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftokoroteen.github.io%2F2022%2F12%2Fscraping-japanese-activity-search-sites-in-search-of-undiscovered-activities%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Ftokoroteen.github.io%2F2022%2F12%2Fscraping-japanese-activity-search-sites-in-search-of-undiscovered-activities%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftokoroteen.github.io%2F2022%2F12%2Fscraping-japanese-activity-search-sites-in-search-of-undiscovered-activities%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/d09dc2d7aa5c467519e8af89f7b3d94c?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Tokoroteen</h4>
+    
+      <div id="about-card-bio">Something interesting that moves your heart</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Graduate student
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Japan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://tokoroteen.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://tokoroteen.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

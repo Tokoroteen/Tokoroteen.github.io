@@ -15,7 +15,7 @@
 baseURL = "https://tokoroteen.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "Hugo tranquilpeak theme"
+title = "Tokoroteen"
 theme = "hugo-tranquilpeak-theme"
 # theme = "tranquilpeak"
 disqusShortname = "hugo-tranquilpeak-theme"
@@ -91,7 +91,7 @@ canonifyurls = true
   weight = 5
   identifier = "archives"
   name = "Tags"
-  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-tags\" aria-hidden=\"true\"></i>"
+  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-archive\" aria-hidden=\"true\"></i>"
   url = "/archives"
 [[menu.main]]
   weight = 6
@@ -106,6 +106,12 @@ canonifyurls = true
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fab fa-lg fa-github\" aria-hidden=\"true\"></i>"
   url = "https://github.com/tokoroteen"
+[[menu.links]]
+  weight = 2
+  identifier = "twitter"
+  name = "Twitter"
+  pre = "<i class=\"sidebar-button-icon fab fa-lg fa-twitter\" aria-hidden=\"true\"></i>"
+  url = "https://twitter.com/Tokoroteen__"
 
 [[menu.misc]]
   weight = 1

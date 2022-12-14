@@ -19,7 +19,7 @@ title = "Tokoroteen"
 theme = "hugo-tranquilpeak-theme"
 # theme = "tranquilpeak"
 disqusShortname = "hugo-tranquilpeak-theme"
-# googleAnalytics = "UA-123-45"
+googleAnalytics = "G-3FWK5VSYV0"
 paginate = 7
 canonifyurls = true
 
